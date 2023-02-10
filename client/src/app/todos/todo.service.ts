@@ -17,7 +17,7 @@ export class TodoService {
   constructor(private httpClient: HttpClient) {
    }
 
-   getTodos(filters?: {category?: TodoCategory; status?: boolean }): Observable<Todo[]> {
+   getTodos(filters?: {category?: TodoCategory; status?: boolean; owner?: string }): Observable<Todo[]> {
     let httpParams: HttpParams = new HttpParams();
     if (filters) {
       if (filters.category) {
@@ -35,16 +35,22 @@ export class TodoService {
    getTodoById(id: string): Observable<Todo> {
     return this.httpClient.get<Todo>(this.todoUrl + '/' + id);
   }
-/*
-  filterUsers(todos: Todo[], filters?: { status?: boolean }): Todo[] {
-    let filteredTodos = todos;
 
+  filterTodos(todos: Todo[], filters?: { status?: boolean; owner?: string }): Todo[] {
+    let filteredTodos = todos;
+    /*
     if (filters.status) {
       switch(String(filters.status).toLowerCase()){
         case 'complete': {
           return filteredTodos = filteredTodos.filter(todo => todo.status.toLowerCase().indexOf(filters.status) !== -1);
         }
       }
+    } */
+    if (filters.owner){
+      filters.owner = filters.owner.toLowerCase();
+      filteredTodos = filteredTodos.filter(todo => todo.owner.toLowerCase().indexOf(filters.owner) !== -1);
     }
-}*/
+
+    return filteredTodos;
+}
 }
