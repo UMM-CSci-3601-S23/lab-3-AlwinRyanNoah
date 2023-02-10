@@ -1,8 +1,6 @@
 <mat-nav-list>
-  <mat-list-item *ngFor="let todo of this.filteredTodos" [routerLink]="['/todos', todo._id]" class="">
-     <a matListItemTitle href="...">{{ link }}</a>
-     <button mat-icon-button (click)="getTodosFromServer(link)" matListItemMeta>
-        <mat-icon>info</mat-icon>
-     </button>
-  </mat-list-item>
+  <a mat-list-item *ngFor="let todo of this.filteredTodos" [routerLink]="['/todos', todo._id]" class="">
+     <span mat-line class="todo-list-owner"> {{todo.owner}}</span>
+     <span mat-line class="todo-list-body"> {{todo.body}}</span>
+     </a>
 </mat-nav-list>
