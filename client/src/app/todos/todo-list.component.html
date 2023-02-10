@@ -1,10 +1,11 @@
 <mat-card appearance="outlined">
     <mat-card-content>
-      <mat-list class="todo-nav-list">
+      <mat-nav-list class="todo-nav-list">
         <a mat-list-item *ngFor="let todo of this.filteredTodos" [routerLink]="['/todos', todo._id]" class="">
-          <span matListItemTitle class="todo-list-owner"> {{todo.owner}}</span>
-          <span matListItemLine class="todo-list-body"> {{todo.body}}</span>
+          <span matListItemTitle class="todo-list-owner">{{todo.category.toUpperCase()}}</span>
+          <span matListItemLine class="todo-list-stuff"><b>{{todo.owner}}</b> needs to: {{todo.body}}</span>
+
           </a>
-    </mat-list>
+    </mat-nav-list>
   </mat-card-content>
 </mat-card>
