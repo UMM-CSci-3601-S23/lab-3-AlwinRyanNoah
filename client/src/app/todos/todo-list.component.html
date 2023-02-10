@@ -1,8 +1,10 @@
 <mat-card appearance="outlined">
     <mat-card-content>
       <mat-nav-list class="todo-nav-list">
+        <h3 mat-subheader>Todos</h3>
         <a mat-list-item *ngFor="let todo of this.filteredTodos" [routerLink]="['/todos', todo._id]" class="">
-          <span mat-line class="todo-list-owner"> {{todo.owner}}</span>
+          <mat-icon> matListIcon > people</mat-icon>
+          <span matListItemTitle mat-line class="todo-list-owner"> {{todo.owner}}</span>
           <span mat-line class="todo-list-body"> {{todo.body}}</span>
           </a>
     </mat-nav-list>
