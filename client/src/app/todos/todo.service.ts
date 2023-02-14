@@ -17,19 +17,22 @@ export class TodoService {
   constructor(private httpClient: HttpClient) {
   }
 
-  //filtering using the server
-  //we are filtering status and owner through the server
-  getTodos(filters?: { status?: boolean; owner?: string }): Observable<Todo[]> {
-   let httpParams: HttpParams = new HttpParams();
-   if (filters) {
-     if (filters.owner) {
-       httpParams = httpParams.set('owner', filters.owner);
-     }
-     if (filters.status) {
-       httpParams = httpParams.set('status', filters.status.toString());
-     }
-   }
-   return this.httpClient.get<Todo[]>(this.todoUrl, {
+   //filtering using the server
+   //we are filtering status and owner through the server
+   getTodos(filters?: { status?: boolean; owner?: string }): Observable<Todo[]> {
+    let httpParams: HttpParams = new HttpParams();
+    if (filters) {
+      if (filters.owner) {
+        httpParams = httpParams.set('owner', filters.owner);
+      }
+      if (filters.status === true) {
+        httpParams = httpParams.set('status', filters.status.toString());
+      }
+      if (filters.status === false) {
+        httpParams = httpParams.set('status', filters.status.toString());
+      }
+    }
+    return this.httpClient.get<Todo[]>(this.todoUrl, {
       params: httpParams,
     });
    }
