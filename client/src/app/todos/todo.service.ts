@@ -17,14 +17,16 @@ export class TodoService {
   constructor(private httpClient: HttpClient) {
    }
 
-   getTodos(filters?: {category?: TodoCategory; status?: boolean; owner?: string }): Observable<Todo[]> {
+   //filtering using the server
+   //we are filtering status and owner through the server
+   getTodos(filters?: { status?: boolean; owner?: string }): Observable<Todo[]> {
     let httpParams: HttpParams = new HttpParams();
     if (filters) {
-      if (filters.category) {
-        httpParams = httpParams.set('role', filters.category);
+      if (filters.owner) {
+        httpParams = httpParams.set('owner', filters.owner);
       }
       if (filters.status) {
-        httpParams = httpParams.set('age', filters.status.toString());
+        httpParams = httpParams.set('status', filters.status.toString());
       }
     }
     return this.httpClient.get<Todo[]>(this.todoUrl, {
@@ -36,19 +38,19 @@ export class TodoService {
     return this.httpClient.get<Todo>(this.todoUrl + '/' + id);
   }
 
-  filterTodos(todos: Todo[], filters?: { status?: boolean; owner?: string }): Todo[] {
+  //filtering using angular
+  //we are filtering body and category through angular
+  filterTodos(todos: Todo[], filters?: { body?: string; category?: string }): Todo[] {
     let filteredTodos = todos;
-    /*
-    if (filters.status) {
-      switch(String(filters.status).toLowerCase()){
-        case 'complete': {
-          return filteredTodos = filteredTodos.filter(todo => todo.status.toLowerCase().indexOf(filters.status) !== -1);
-        }
-      }
-    } */
-    if (filters.owner){
-      filters.owner = filters.owner.toLowerCase();
-      filteredTodos = filteredTodos.filter(todo => todo.owner.toLowerCase().indexOf(filters.owner) !== -1);
+
+    if (filters.body){
+      filters.body = filters.body.toLowerCase();
+      filteredTodos = filteredTodos.filter(todo => todo.body.toLowerCase().indexOf(filters.body) !== -1);
+    }
+
+    if (filters.category){
+      filters.category = filters.category.toLowerCase();
+      filteredTodos = filteredTodos.filter(todo => todo.category.toLowerCase().indexOf(filters.category) !== -1);
     }
 
     return filteredTodos;
