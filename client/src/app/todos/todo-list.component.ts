@@ -22,10 +22,11 @@ export class TodoListComponent implements OnInit{
   constructor(private todoService: TodoService, private snackBar: MatSnackBar) {
   }
 
-  //Server filtered users
+  //Server filtered todos
   getTodosFromServer(){
     this.todoService.getTodos({
-      status: this.todoStatus
+      status: this.todoStatus,
+      owner: this.todoOwner
     }).subscribe(returnedTodos => {
       this.serverFilteredTodo = returnedTodos;
       this.updateFilter();
