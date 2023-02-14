@@ -56,6 +56,7 @@ describe('TodoService', () => {
     httpTestingController.verify();
   });
 
+  //testing for filtering on the server
   describe('getTodos()', () => {
 
     it('correctly calls `api/todos` when `getTodos()` is called with no parameters', () => {
@@ -92,7 +93,7 @@ describe('TodoService', () => {
 
     });
 
-    it('correctly calls api/todos with filter parameter \'status\'', () => {
+    it('correctly calls api/todos with filter parameter \'status true\'', () => {
 
       todoService.getTodos({status: true}).subscribe(
         todos => expect(todos).toBe(testTodos)
@@ -106,6 +107,24 @@ describe('TodoService', () => {
       expect(req.request.method).toEqual('GET');
       // Check that the request was 'true'.
       expect(req.request.params.get('status')).toBe('true');
+
+      req.flush(testTodos);
+    });
+
+    it('correctly calls api/todos with filter parameter \'status false\'', () => {
+
+      todoService.getTodos({status: false}).subscribe(
+        todos => expect(todos).toBe(testTodos)
+      );
+
+      // Specify that (exactly) one request will be made to the specified URL with the status parameter.
+      const req = httpTestingController.expectOne(
+        (request) => request.url.startsWith(todoService.todoUrl) && request.params.has('status')
+      );
+      // Check that the request made to that URL was a GET request.
+      expect(req.request.method).toEqual('GET');
+      // Check that the request was 'false'.
+      expect(req.request.params.get('status')).toBe('false');
 
       req.flush(testTodos);
     });
@@ -131,5 +150,7 @@ describe('TodoService', () => {
       req.flush(testTodos);
 
     });
+
+
   });
 });
