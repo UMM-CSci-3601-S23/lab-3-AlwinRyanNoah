@@ -25,12 +25,12 @@ export class TodoService {
       if (filters.owner) {
         httpParams = httpParams.set('owner', filters.owner);
       }
-      if (filters.status === true) {
+      if (filters.hasOwnProperty('status')) {
         httpParams = httpParams.set('status', filters.status.toString());
       }
-      if (filters.status === false) {
+      /*if (filters.status === false) {
         httpParams = httpParams.set('status', filters.status.toString());
-      }
+      }*/
     }
     return this.httpClient.get<Todo[]>(this.todoUrl, {
       params: httpParams,
