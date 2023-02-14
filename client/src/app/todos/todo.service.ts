@@ -15,7 +15,7 @@ export class TodoService {
 
 
   constructor(private httpClient: HttpClient) {
-   }
+  }
 
    //filtering using the server
    //we are filtering status and owner through the server
