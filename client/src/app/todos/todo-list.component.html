@@ -50,13 +50,28 @@
             <mat-hint>Filtered on Client</mat-hint>
           </mat-form-field>
         </div>
+
+        <br>
+        <div class="flex-row gap-10 flex-wrap">
+          <label>View Type: </label>
+          <mat-radio-group aria-label="View type" [(ngModel)]="viewType" data-test="viewTypeRadio">
+            <mat-radio-button value="card">Card</mat-radio-button>
+            <mat-radio-button value="list">List</mat-radio-button>
+          </mat-radio-group>
+        </div>
       </mat-card-content>
     </mat-card>
   </div>
 </div>
 
+
+
 <div class="flex-row">
-  <div class="flex-1" fxFlex.gt-sm="80" fxFlexOffset.gt-sm="10" *ngIf="serverFilteredTodo"></div>
+  <div class="flex-1" fxFlex.gt-sm="80" fxFlexOffset.gt-sm="10" *ngIf="serverFilteredTodo">
+<div [ngSwitch]="viewType">
+
+  <!-- Card Griddy View-->
+  <div *ngSwitchCase="'card'" class="todo-cards-container flex-row gap-10 flex-wrap"></div>
   <app-todo-card [simple]="true" *ngFor="let todo of filteredTodos" class="todo-card" [todo]="todo" fxFlex="1 1 280px"></app-todo-card>
 </div>
 
@@ -73,6 +88,23 @@
   </mat-nav-list>
 </mat-card-content>
 </mat-card>
+</div>
+</div>
+
+
+  <!-- Maybe this should be a pop-up instead of just a text message? Not sure. -->
+  <ng-template #todosError>
+    <div class="flex-1" fxFlex.gt-sm="80" fxFlexOffset.gt-sm="10" class="todo-error">
+      <mat-error>
+        There was a problem loading the todos. Possibly the server is down or perhaps there are network
+        issues.
+      </mat-error>
+      <mat-error>
+        Please wait a bit and try again or start the server.
+      </mat-error>
+    </div>
+  </ng-template>
+
 
 
 
