@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { filter } from 'rxjs';
 import { UserService } from '../users/user.service';
 import { Todo } from './todo';
 import { TodoService } from './todo.service';
@@ -34,7 +35,7 @@ describe('TodoService', () => {
         owner: 'KK',
         status: false,
         body: 'Headin into twilight spreadin out her wings tonight',
-        category: 'groceries',
+        category: 'software design',
         },
   ];
   let todoService: TodoService;
@@ -174,4 +175,31 @@ describe('TodoService', () => {
     });
   });
 
+  //filtering client side testing
+  describe('filterTodos()', () => {
+
+    //test for filtering by text in a body
+    it('filters by body', () => {
+      const todoBody = 'Highway to the Danger Zone ride into the Danger Zone';
+      const filteredTodos = todoService.filterTodos(testTodos, {body: todoBody});
+
+      expect(filteredTodos.length).toBe(1);
+
+      filteredTodos.forEach(todo => {
+        expect(todo.body.indexOf(todoBody)).toBeGreaterThanOrEqual(0);
+      });
+    });
+
+    //test for filtering by category
+    it('filters by category', () => {
+      const todoCategory = 'software design';
+      const filteredTodos = todoService.filterTodos(testTodos, {category: todoCategory});
+
+      expect(filteredTodos.length).toBe(2);
+
+      filteredTodos.forEach(todo => {
+        expect(todo.category.indexOf(todoCategory)).toBeGreaterThanOrEqual(0);
+      });
+    });
+  });
 });
