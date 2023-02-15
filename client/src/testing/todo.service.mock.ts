@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Observable, of, retry } from 'rxjs';
-import { Todo, TodoCategory } from 'src/app/todos/todo';
+import { Observable, of} from 'rxjs';
+import { Todo} from 'src/app/todos/todo';
 import { TodoService } from 'src/app/todos/todo.service';
 
 @Injectable()
