@@ -10,11 +10,11 @@ describe('TodoService', () => {
   //A small collection of test todos
   const testTodos: Todo[] = [
     {
-    _id: 'alwin_id',
-    owner: 'Alwin',
-    status: true,
-    body: 'Revvin up your engine listen to her howlin roar',
-    category: 'homework',
+      _id: 'alwin_id',
+      owner: 'Alwin',
+      status: true,
+      body: 'Revvin up your engine listen to her howlin roar',
+      category: 'homework',
     },
     {
       _id: 'ryan_id',
@@ -29,14 +29,14 @@ describe('TodoService', () => {
       status: true,
       body: 'Highway to the Danger Zone ride into the Danger Zone',
       category: 'video games',
-      },
-      {
-        _id: 'kk_id',
-        owner: 'KK',
-        status: false,
-        body: 'Headin into twilight spreadin out her wings tonight',
-        category: 'software design',
-        },
+    },
+    {
+      _id: 'kk_id',
+      owner: 'KK',
+      status: false,
+      body: 'Headin into twilight spreadin out her wings tonight',
+      category: 'software design',
+    }
   ];
   let todoService: TodoService;
   let httpClient: HttpClient;
