@@ -14,11 +14,11 @@ export class TodoListPage {
   }
 
   getTodoListItems() {
-    return cy.get('.user-nav-list');
+    return cy.get('.todo-nav-list .todo-list-item');
   }
 
-  selectCategory(value: TodoCategory) {
-    return cy.get('[data-test="todoRoleSelect"]').click()
+  selectStatus(value) {
+    return cy.get('[data-test="todoStatusSelect"]').click()
     .get(`mat-option[value="${value}"`).click();
   }
 }
