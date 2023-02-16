@@ -1,8 +1,6 @@
 <!-- Owner/Status = Server-->
 <!-- Body/Category = Angular-->
 
-
-<!--This creates the filtering box on the top of the page. This box filters the Owner, Status, Body, and Category-->
 <div class="flex-row">
   <div class="flex-1" fxFlex.gt-sm="80" fxFlexOffset.gt-sm="10">
 
@@ -10,31 +8,8 @@
       <mat-card-title class="todo-list-title">Todos</mat-card-title>
       <mat-card-content class="flex-col">
 
-        <!-- Owner and Status are filtered on the server-->
-          <!-- This filters by the name(owner) of the Todos and displays the contents that contains the text-->
         <div class="flex-row gap-10 flex-wrap">
-            <mat-form-field class="input-field">
-              <mat-label>Owner</mat-label>
-              <input matInput data-test="todoOwnerInput" type="string" placeholder="Filter by Owner"
-              [(ngModel)]="todoOwner" (input)="getTodosFromServer()">
-              <mat-hint>Filtered on Server</mat-hint>
-            </mat-form-field>
-          <!-- This filters the todos by the Status of the Todos and displays the Todos that are either complete or incomplete-->
-            <mat-form-field class="input-field">
-              <mat-label>Status</mat-label>
-              <mat-select (selectionChange)="getTodosFromServer()" [(ngModel)]="todoStatus" data-test="todoRoleSelect">
-                <mat-option>--</mat-option>
-                <mat-option value="complete">Complete</mat-option>
-                <mat-option value="incomplete">Incomplete</mat-option>
-              </mat-select>
-              <mat-hint>Filtered on Server</mat-hint>
-            </mat-form-field>
-          </div>
-
-
-        <!-- Both Body and Category are filtered in Angular-->
-          <!-- This filters the body of the Todos and displays the contents that contains the text-->
-        <div class="flex-row gap-10 flex-wrap">
+          <!-- Both Body and Category are filtered in Angular-->
           <mat-form-field class="input-field">
             <mat-label>Body</mat-label>
             <input matInput data-test="todoBodyInput" placeholder="Filter by Body"
@@ -42,7 +17,6 @@
             <mat-hint>Filtered on client</mat-hint>
           </mat-form-field>
 
-          <!-- This filters the Category of the Todos and displays the contents that contains the text-->
           <mat-form-field class="input-field">
             <mat-label>Category</mat-label>
             <input matInput data-test="todoCategoryInput" placeholder="Filter by Category"
@@ -51,43 +25,28 @@
           </mat-form-field>
         </div>
 
-        <br>
         <div class="flex-row gap-10 flex-wrap">
 
         <!-- Owner and Status are filtered on the server-->
-          <mat-form-field class="input-field">
-            <mat-label>Owner</mat-label>
-            <input matInput data-test="todoOwnerInput" type="string" placeholder="Filter by Owner"
-            [(ngModel)]="todoOwner" (input)="getTodosFromServer()">
-          </mat-form-field>
+        <mat-form-field class="input-field">
+          <mat-label>Owner</mat-label>
+          <input matInput data-test="todoOwnerInput" type="string" placeholder="Filter by Owner"
+          [(ngModel)]="todoOwner" (input)="getTodosFromServer()">
+        </mat-form-field>
 
-          <mat-form-field class="input-field">
-            <mat-label>Status</mat-label>
-            <mat-select (selectionChange)="getTodosFromServer()" [(ngModel)]="todoStatus" data-test="todoStatusSelect">
-              <mat-option>--</mat-option>
-              <mat-option value="complete">Complete</mat-option>
-              <mat-option value="incomplete">Incomplete</mat-option>
-            </mat-select>
-            <mat-hint>Filtered on Server</mat-hint>
-          </mat-form-field>
-        </div>
-      </mat-card-content>
-    </mat-card>
-  </div>
-</div>
+        <mat-form-field class="input-field">
+          <mat-label>Status</mat-label>
+          <mat-select (selectionChange)="getTodosFromServer()" [(ngModel)]="todoStatus" data-test="todoStatusSelect">
+            <mat-option>--</mat-option>
+            <mat-option value="complete">Complete</mat-option>
+            <mat-option value="incomplete">Incomplete</mat-option>
+          </mat-select>
+          <mat-hint>Filtered on Server</mat-hint>
+        </mat-form-field>
+      </div>
+    </mat-card-content>
+  </mat-card>
 
-
-
-<div class="flex-row">
-  <div class="flex-1" fxFlex.gt-sm="80" fxFlexOffset.gt-sm="10" *ngIf="serverFilteredTodo">
-<div [ngSwitch]="viewType">
-
-  <!-- Card Griddy View-->
-  <div *ngSwitchCase="'card'" class="todo-cards-container flex-row gap-10 flex-wrap"></div>
-  <app-todo-card [simple]="true" *ngFor="let todo of filteredTodos" class="todo-card" [todo]="todo" fxFlex="1 1 280px"></app-todo-card>
-</div>
-
-<!--Creates the list view of the Todos-->
 <mat-card appearance="outlined">
   <mat-card-content>
     <mat-nav-list class="todo-nav-list">
@@ -100,23 +59,6 @@
   </mat-nav-list>
 </mat-card-content>
 </mat-card>
-</div>
-</div>
-
-
-  <!-- Maybe this should be a pop-up instead of just a text message? Not sure. -->
-  <ng-template #todosError>
-    <div class="flex-1" fxFlex.gt-sm="80" fxFlexOffset.gt-sm="10" class="todo-error">
-      <mat-error>
-        There was a problem loading the todos. Possibly the server is down or perhaps there are network
-        issues.
-      </mat-error>
-      <mat-error>
-        Please wait a bit and try again or start the server.
-      </mat-error>
-    </div>
-  </ng-template>
-
 
 
 
